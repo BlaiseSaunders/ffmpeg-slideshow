@@ -14,7 +14,7 @@ then
 fi
 
 mkdir $WORKING_DIR 2>/dev/null
-echo "Processing your images in parallel, this will take some time during which there will be output. You can check $WORKING_DIR to see the intermediate files"
+echo "Processing your images in parallel, this will take some time during which there will be no output. You can check $WORKING_DIR to see the intermediate files"
 find $1 -name "*.$2" | parallel -I% --max-args 1 convert % -resize "$3x$4" -background Black -gravity center -extent "$3x$4" $WORKING_DIR/{#}-scaled.jpg
 echo "Finished converting images, creating video file"
 ffmpeg -framerate $5 -pattern_type glob -i $WORKING_DIR/'*.jpg' $7 $6
