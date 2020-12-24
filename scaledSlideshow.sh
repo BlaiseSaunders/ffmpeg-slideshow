@@ -19,5 +19,5 @@ find $1 -name "*.$2" | parallel -I% --max-args 1 convert % -resize "$3x$4" -back
 echo "Finished converting images, creating video file"
 ffmpeg -framerate $5 -pattern_type glob -i $WORKING_DIR/'*.jpg' $7 $6
 echo "Created video file, cleaning intermediate files"
-rm $WORKING_DIR
+rm -r $WORKING_DIR
 
